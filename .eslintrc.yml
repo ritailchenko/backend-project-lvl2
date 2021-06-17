@@ -6,7 +6,9 @@ extends:
 parserOptions:
   ecmaVersion: 12
   sourceType: module
-rules: {}
+rules:
+  no-console: 0
+  import/extensions: 0
 # npx eslint . - проверка линтером
 # npx eslint --fix . -автоматическое исправление линтером
 
