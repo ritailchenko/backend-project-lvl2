@@ -52,7 +52,7 @@ const genDiff = (file1, file2) => {
     }
     if (currVal.status === 'changed') {
       acc.push(
-        `  - ${currVal.key}: ${currVal.value1}\n  + ${currVal.key}: ${currVal.value2}`
+        `  - ${currVal.key}: ${currVal.value1}\n  + ${currVal.key}: ${currVal.value2}`,
       );
     }
     if (currVal.status === 'added') {
