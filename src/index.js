@@ -3,8 +3,8 @@ import path from 'path';
 import _ from 'lodash';
 
 const genDiff = (file1, file2) => {
-  const path1 = path.resolve('../backend-project-lvl2', file1);
-  const path2 = path.resolve('../backend-project-lvl2', file2);
+  const path1 = path.resolve('../__fixtures__', file1);
+  const path2 = path.resolve('../__fixtures__', file2);
 
   const data1 = JSON.parse(fs.readFileSync(path1, 'utf8'));
   const data2 = JSON.parse(fs.readFileSync(path2, 'utf8'));
@@ -63,26 +63,10 @@ const genDiff = (file1, file2) => {
     }
     return acc;
   }, []);
-  // console.log(`{\n${sortedResultArrayToString.join('\n')} \n}`);
 
+  // console.log(sortedResultArrayToString)
   return `{\n${sortedResultArrayToString.join('\n')} \n}`;
-  // sortedResultArray.forEach((obj) => {
-  //   if (obj.status === 'deleted') {
-  //     console.log(`{ - ${obj.key}: ${obj.value}`);
-  //   }
-
-  //   if (obj.status === 'changed') {
-  //     return ` - ${obj.key}: ${obj.value1}\n + ${obj.key}: ${obj.value2}`;
-  //   }
-  //   if (obj.status === 'added') {
-  //     return ` + ${obj.key}: ${obj.value}`;
-  //   }
-  //   if (obj.status === 'unchanged') {
-  //     return `   ${obj.key}: ${obj.value}`;
-  //   }
-  // });
 };
-
-// console.log(genDiff(file1, file2));
+// console.log(genDiff('file1.json', 'file2.json'))
 
 export default genDiff;
