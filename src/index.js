@@ -65,7 +65,7 @@ const genDiff = (file1, file2) => {
   }, []);
 
   // console.log(sortedResultArrayToString)
-  return `{\n${sortedResultArrayToString.join('\n')} \n}`;
+  return `{\n${sortedResultArrayToString.join('\n')}\n}`;
 };
 // console.log(genDiff('file1.json', 'file2.json'))
 
