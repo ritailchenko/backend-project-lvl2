@@ -28,3 +28,5 @@ jobs:
         run: npm install
       - name: start lint
         run: make lint
+      - name: Test
+        run: npx -n --experimental-vm-modules jest --watch
