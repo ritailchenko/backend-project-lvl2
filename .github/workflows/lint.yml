@@ -17,23 +17,29 @@ jobs:
       matrix:
         node-version: [14.x]
 
-    steps: # these is necessary for github to run workflow
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install
+      run: |
+        make install
+      env: 
+        CI: true
+    - name: run linter
+      run: |
+        make lint
+    - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v2.7.4
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.COTTON_CANDY }}
+      with:
+        coverageCommand: make test-coverage
+        debug: true
 
-      - name: Install
-        run: npm install
-      - name: start lint
-        run: make lint
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.4
-        env: 
-          CC_TEST_REPORTER_ID: ${{ secrets.COTTON_CANDY }}
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+
+
 
 
