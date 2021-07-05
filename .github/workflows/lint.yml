@@ -30,8 +30,9 @@ jobs:
         run: make lint
       - name: Test & publish code coverage
         env: 
-          CC_TEST_REPORTER_ID: ${{ COTTON_CANDY }}
-        run: make test
+          CC_TEST_REPORTER_ID: ${{ secrets.COTTON_CANDY }}
+        run: make test-coverage
+        debug: true
         # with:
         #   coverageCommand: make test
 
