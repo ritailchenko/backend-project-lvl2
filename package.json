@@ -7,7 +7,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx -n --experimental-vm-modules jest"
+    "test": "npx -n --experimental-vm-modules jest --bail"
   },
   "type": "module",
   "repository": {
