@@ -28,5 +28,11 @@ jobs:
         run: npm install
       - name: start lint
         run: make lint
-      - name: Test
-        run: npx -n --experimental-vm-modules jest --watch
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.4
+        env: 
+          CC_TEST_REPORTER_ID: ${{ COTTON_CANDY }}
+        with:
+          coverageCommand: make test
+
+

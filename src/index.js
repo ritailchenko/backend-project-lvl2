@@ -3,8 +3,8 @@ import path from 'path';
 import _ from 'lodash';
 
 const genDiff = (file1, file2) => {
-  const path1 = path.resolve('../__fixtures__', file1);
-  const path2 = path.resolve('../__fixtures__', file2);
+  const path1 = path.resolve('../backend-project-lvl2/__fixtures__', file1);
+  const path2 = path.resolve('../backend-project-lvl2/__fixtures__', file2);
 
   const data1 = JSON.parse(fs.readFileSync(path1, 'utf8'));
   const data2 = JSON.parse(fs.readFileSync(path2, 'utf8'));

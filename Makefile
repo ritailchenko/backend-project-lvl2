@@ -10,5 +10,5 @@ lint:
 say:
 	echo "Hello, $(Hello)!"
 
-test: 
+test:
 	npx -n --experimental-vm-modules jest
