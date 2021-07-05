@@ -1,23 +1,19 @@
-name: make lint
+name: Node.js CI
 
-# on pull of push request of these branches do the following work flow. These is what triggers workflow
 on:
-  pull_request:
-  push:
-    branches:
-      - master
-      - develop
+  - push
+  - pull_request
 
 jobs:
-  eslint:
-    name: start make lint
-    runs-on: macos-latest
+  build:
+
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [14.x]
 
-steps:
+    steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -38,8 +34,3 @@ steps:
       with:
         coverageCommand: make test-coverage
         debug: true
-
-
-
-
-
