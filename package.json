@@ -7,7 +7,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx -n --experimental-vm-modules jest --bail"
+    "test": "npx -n --experimental-vm-modules jest"
   },
   "type": "module",
   "repository": {
@@ -22,8 +22,9 @@
   "homepage": "https://github.com/ritailchenko/backend-project-lvl2#readme",
   "dependencies": {
     "@jest/globals": "^27.0.6",
-    "jest-cli": "^26.6.3",
     "commander": "^7.2.0",
+    "jest-cli": "^26.6.3",
+    "js-yaml": "^3.14.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

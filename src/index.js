@@ -1,13 +1,9 @@
-import fs from 'fs';
-import path from 'path';
 import _ from 'lodash';
+import parser from '../parsers.js';
 
 const genDiff = (file1, file2) => {
-  const path1 = path.resolve('../backend-project-lvl2/__fixtures__', file1);
-  const path2 = path.resolve('../backend-project-lvl2/__fixtures__', file2);
-
-  const data1 = JSON.parse(fs.readFileSync(path1, 'utf8'));
-  const data2 = JSON.parse(fs.readFileSync(path2, 'utf8'));
+  const data1 = parser(file1);
+  const data2 = parser(file2);
 
   const keys1 = _.keys(data1);
   const keys2 = _.keys(data2);
@@ -44,7 +40,6 @@ const genDiff = (file1, file2) => {
   });
 
   const sortedResultArray = _.sortBy(result, [(o) => o.key]);
-  // console.log(sortedResultArray);
 
   const sortedResultArrayToString = sortedResultArray.reduce((acc, currVal) => {
     if (currVal.status === 'deleted') {
@@ -64,9 +59,7 @@ const genDiff = (file1, file2) => {
     return acc;
   }, []);
 
-  // console.log(sortedResultArrayToString)
   return `{\n${sortedResultArrayToString.join('\n')}\n}`;
 };
-// console.log(genDiff('file1.json', 'file2.json'))
 
 export default genDiff;
