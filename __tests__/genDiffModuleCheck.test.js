@@ -17,6 +17,3 @@ const resultedStr = readFile('resultedString.txt').trim();
 test('file1.json compare to file2.json to equal resultedStr', () => {
   expect(genDiff('file1.json', 'file2.yaml')).toMatch(resultedStr);
 });
-
-// console.log(genDiff('file1.json', 'file2.yaml'))
-// console.log(resultedStr)
