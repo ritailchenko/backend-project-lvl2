@@ -1,15 +1,36 @@
 import _ from 'lodash';
 import parser from './parsers.js';
+import stylish from './stylish.js';
+import stringify from './stringify.js';
 
 const genDiff = (file1, file2) => {
-  const data1 = parser(file1);
-  const data2 = parser(file2);
+  let data1;
+  let data2;
+
+  if (!_.isObject(file1) && !_.isObject(file2)) {
+    if (file1.split('.')[1] === 'yaml' || file1.split('.')[1] === 'json') {
+      data1 = parser(file1);
+    }
+    if (file2.split('.')[1] === 'yaml' || file2.split('.')[1] === 'json') {
+      data2 = parser(file2);
+    }
+  } else {
+    data1 = file1;
+    data2 = file2;
+  }
 
   const keys1 = _.keys(data1);
   const keys2 = _.keys(data2);
   const keys = _.union(keys1, keys2);
 
-  const result = keys.map((key) => {
+  const resultTree = keys.map((key) => {
+    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+      return {
+        key,
+        children: genDiff(data1[key], data2[key]),
+        status: 'nested',
+      };
+    }
     if (!_.has(data1, key)) {
       return {
         key,
@@ -38,28 +59,11 @@ const genDiff = (file1, file2) => {
       status: 'unchanged',
     };
   });
+  const sortedResultArray = _.sortBy(resultTree, [(o) => o.key]);
+  console.log(stringify(stylish(sortedResultArray)));
+  // console.log(sortedResultArray);
 
-  const sortedResultArray = _.sortBy(result, [(o) => o.key]);
-
-  const sortedResultArrayToString = sortedResultArray.reduce((acc, currVal) => {
-    if (currVal.status === 'deleted') {
-      acc.push(`  - ${currVal.key}: ${currVal.value}`);
-    }
-    if (currVal.status === 'changed') {
-      acc.push(
-        `  - ${currVal.key}: ${currVal.value1}\n  + ${currVal.key}: ${currVal.value2}`,
-      );
-    }
-    if (currVal.status === 'added') {
-      acc.push(`  + ${currVal.key}: ${currVal.value}`);
-    }
-    if (currVal.status === 'unchanged') {
-      acc.push(`    ${currVal.key}: ${currVal.value}`);
-    }
-    return acc;
-  }, []);
-
-  return `{\n${sortedResultArrayToString.join('\n')}\n}`;
+  return sortedResultArray;
 };
 
 export default genDiff;
