@@ -26,31 +26,25 @@ const stringify = (obj, symb = '  ', spaceCount = 1) => {
 const obj1 = {
   common: {
     setting1: 'Value 1',
-    setting2: 'lamp',
-    setting6: {
-      doge: {
-        wow: '',
-      },
-    },
+    setting2: 200,
+    setting3: true,
+    setting6: { key: 'value', doge: { wow: '' } },
   },
-  setting2: 'orange',
+  group1: { baz: 'bas', foo: 'bar', nest: { key: 'value' } },
+  group2: { abc: 12345, deep: { id: 45 } },
 };
 
 const obj2 = {
   common: {
+    follow: false,
     setting1: 'Value 1',
     setting3: null,
     setting4: 'blah blah',
-    setting6: {
-      goodbye: {
-        wow: 'iceCream',
-      },
-    },
+    setting5: { key5: 'value5' },
+    setting6: { key: 'value', ops: 'vops', doge: { wow: 'so much' } },
   },
-  setting2: 'apple',
-  setting5: {
-    key5: 'value5',
-  },
+  group1: { foo: 'bar', baz: 'bars', nest: 'str' },
+  group3: { deep: { id: { number: 45 } }, fee: 100500 },
 };
 
 const buildTree = (data1, data2) => {
@@ -98,15 +92,13 @@ const buildTree = (data1, data2) => {
   return sortedResultArray;
   // return `{\n${sortedResultArrayToString.join('\n')}\n}`;
 };
-
-console.log(typeof buildTree(obj1, obj2));
+// console.log(buildTree(obj1, obj2));
 
 const stylish = (arr) => {
   const styledTree = arr.reduce((acc, obj) => {
     switch (obj.status) {
       case 'added':
         acc[`+ ${obj.key}`] = obj.value;
-
         break;
       case 'deleted':
         acc[`- ${obj.key}`] = obj.value;
@@ -115,8 +107,8 @@ const stylish = (arr) => {
         acc[`  ${obj.key}`] = obj.value;
         break;
       case 'changed':
-        acc[`- ${obj.key}`] = `${obj.value2}`;
-        acc[`+ ${obj.key}`] = `${obj.value1}`;
+        acc[`- ${obj.key}`] = obj.value1;
+        acc[`+ ${obj.key}`] = obj.value2;
 
         break;
       case 'nested':
@@ -130,9 +122,9 @@ const stylish = (arr) => {
   }, {});
   return styledTree;
 };
-console.log(stylish(buildTree(obj1, obj2)));
+// console.log(stylish(buildTree(obj1, obj2)));
 // stylish(buildTree(obj1, obj2));
-// console.log(stringify(stylish(buildTree(obj1, obj2))));
+console.log(stringify(stylish(buildTree(obj1, obj2))));
 
 // let obj1 = {
 //   common: {
