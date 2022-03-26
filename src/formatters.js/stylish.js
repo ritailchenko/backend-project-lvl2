@@ -1,8 +1,7 @@
 import _ from 'lodash';
 
-const stylish = (arr) => {
-  // console.log(arr);
-  const styledTree = arr.reduce((acc, obj) => {
+const styledTree = (arr) => {
+  const tree = arr.reduce((acc, obj) => {
     switch (obj.status) {
       case 'added':
         acc[`+ ${obj.key}`] = obj.value;
@@ -18,31 +17,33 @@ const stylish = (arr) => {
         acc[`+ ${obj.key}`] = obj.value2;
         break;
       case 'nested':
-        acc[`  ${obj.key}`] = stylish(obj.children);
+        acc[`  ${obj.key}`] = styledTree(obj.children);
         break;
       default:
         return true;
     }
     return acc;
   }, {});
+  return tree;
+};
 
+const stringify = (value, replacer = '  ') => {
   const iter = (currentValue, depth) => {
-    const spaceCount = 1;
-    const indent = '  ';
     if (!_.isObject(currentValue)) {
-      return currentValue;
+      return `${currentValue}`;
     }
-    const indentSize = depth * spaceCount;
-    const currentIndent = indent.repeat(indentSize);
-    const bracketIndent = indent.repeat(indentSize - spaceCount);
+    const indent = replacer.repeat(depth);
 
-    const lines = _.map(
-      currentValue,
-      (value, key) => `${currentIndent}${key}: ${iter(value, depth + 2)}`,
+    const lines = Object.entries(currentValue).map(
+      ([key, val]) => `${indent}${key}: ${iter(val, depth + 2)}`,
     );
 
-    return ['{', ...lines, `${bracketIndent}}`].join('\n');
+    return ['{', ...lines, `${indent}}`].join('\n');
   };
-  return iter(styledTree, 1);
+
+  return iter(value, 1);
 };
+
+const stylish = (array) => stringify(styledTree(array));
+
 export default stylish;

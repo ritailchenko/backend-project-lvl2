@@ -12,12 +12,26 @@ const getFixturePath = (filename) =>
 const readFile = (filename) =>
   fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const resultedStr = readFile('resultedString.txt').trim();
+const stringForStylish = readFile('testStringForStylish.txt').trim();
+const stringForPlain = readFile('testStringForPlain.txt').trim();
 
-test('file1.json compare to file2.json to equal resultedStr', () => {
-  expect(genDiff('file1.json', 'file2.yaml')).toMatch(resultedStr);
+test('file1.json compare to file2.json to equal testStringForStylish', () => {
+  expect(genDiff('file1.json', 'file2.json', { format: 'stylish' })).toMatch(
+    stringForStylish,
+  );
 });
-
-test('file1.yaml compare to file2.yaml to equal resultedStr', () => {
-  expect(genDiff('file1.json', 'file2.yaml')).toMatch(resultedStr);
+test('file1.yaml compare to file2.yaml to equal testStringForStylish', () => {
+  expect(genDiff('file1.yaml', 'file2.yaml', { format: 'stylish' })).toMatch(
+    stringForStylish,
+  );
+});
+test('file1.json compare to file2.json to equal testStringForPlain', () => {
+  expect(genDiff('file1.json', 'file2.json', { format: 'plain' })).toMatch(
+    stringForPlain,
+  );
+});
+test('file1.yaml compare to file2.yaml to equal testStringForPlain', () => {
+  expect(genDiff('file1.yaml', 'file2.yaml', { format: 'plain' })).toMatch(
+    stringForPlain,
+  );
 });

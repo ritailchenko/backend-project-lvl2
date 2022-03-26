@@ -1,28 +1,24 @@
 import _ from 'lodash';
 import YAML from 'yaml';
 
-const stringify = (obj, symb = '  ', spaceCount = 1) => {
+const stringify = (value, replacer = '  ') => {
   const iter = (currentValue, depth) => {
     if (!_.isObject(currentValue)) {
-      // если не объект отдаем значение
-      return currentValue;
+      return `${currentValue}`;
     }
-    const indentSize = depth * spaceCount; // считаем кол-во отступов
-    const currentIndent = symb.repeat(indentSize); // заполняем отступы нужным символом
-    const bracketIndent = symb.repeat(indentSize - spaceCount);
-    // для фигурных скобок отступ будет на spaceCount меньше
-    // проходим по значения объект
-    const lines = _.map(
-      currentValue,
-      (value, key) => `${currentIndent}${key}: ${iter(value, depth + 2)}`,
+    const indent = replacer.repeat(depth);
+    const indentForLastBracket = replacer.repeat(depth - 1);
+
+    const lines = Object.entries(currentValue).map(
+      ([key, val]) => `${indent}${key}: ${iter(val, depth + 2)}`,
     );
-    // отдаем результат
-    return ['{', ...lines, `${bracketIndent}}`].join('\n');
+
+    return ['{', ...lines, `${indentForLastBracket}}`].join('\n');
   };
 
-  return iter(obj, 1);
+  return iter(value, 1);
 };
-// console.log(stringify(obj3));
+
 const obj1 = {
   common: {
     setting1: 'Value 1',
@@ -109,22 +105,21 @@ const stylish = (arr) => {
       case 'changed':
         acc[`- ${obj.key}`] = obj.value1;
         acc[`+ ${obj.key}`] = obj.value2;
-
         break;
       case 'nested':
         acc[`  ${obj.key}`] = stylish(obj.children);
-
         break;
       default:
         return true;
     }
     return acc;
   }, {});
+  console.log(styledTree);
   return styledTree;
 };
 // console.log(stylish(buildTree(obj1, obj2)));
-// stylish(buildTree(obj1, obj2));
-console.log(stringify(stylish(buildTree(obj1, obj2))));
+stylish(buildTree(obj1, obj2));
+// console.log(stringify(stylish(buildTree(obj1, obj2))));
 
 // let obj1 = {
 //   common: {
