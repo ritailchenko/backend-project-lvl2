@@ -20,7 +20,7 @@ const styledTree = (arr) => {
         acc[`  ${obj.key}`] = styledTree(obj.children);
         break;
       default:
-        return true;
+        throw new Error(`Unknown status: ${obj.status}!`);
     }
     return acc;
   }, {});
