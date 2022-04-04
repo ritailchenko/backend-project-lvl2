@@ -14,6 +14,7 @@ const readFile = (filename) =>
 
 const stringForStylish = readFile('testStringForStylish.txt').trim();
 const stringForPlain = readFile('testStringForPlain.txt').trim();
+const stringForJson = readFile('testStringForJson.txt').trim();
 
 test('file1.json compare to file2.json to equal testStringForStylish', () => {
   expect(genDiff('file1.json', 'file2.json', { format: 'stylish' })).toMatch(
@@ -33,5 +34,15 @@ test('file1.json compare to file2.json to equal testStringForPlain', () => {
 test('file1.yaml compare to file2.yaml to equal testStringForPlain', () => {
   expect(genDiff('file1.yaml', 'file2.yaml', { format: 'plain' })).toMatch(
     stringForPlain,
+  );
+});
+test('file1.json compare to file2.json to equal testStringForJson', () => {
+  expect(genDiff('file1.json', 'file2.json', { format: 'json' })).toMatch(
+    stringForJson,
+  );
+});
+test('file1.yaml compare to file2.yaml to equal testStringForJson', () => {
+  expect(genDiff('file1.yaml', 'file2.yaml', { format: 'json' })).toMatch(
+    stringForJson,
   );
 });
