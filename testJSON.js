@@ -71,10 +71,12 @@ const buildTree = (data1, data2) => {
 };
 // console.log(buildTree(obj1, obj2));
 
-const stylish = (arr) => {
-  const styledTree = arr.reduce((acc, obj) => {
-    switch (obj.status) {
+const styledTree = (arr) => {
+  // console.log(arr);
+  const tree = arr.reduce((acc, obj) => {
+    switch (obj.type) {
       case 'added':
+        // console.log(obj);
         acc[`+ ${obj.key}`] = obj.value;
         break;
       case 'deleted':
@@ -88,17 +90,18 @@ const stylish = (arr) => {
         acc[`+ ${obj.key}`] = obj.value2;
         break;
       case 'nested':
-        acc[`  ${obj.key}`] = stylish(obj.children);
+        acc[`  ${obj.key}`] = styledTree(obj.children);
         break;
       default:
         return true;
+        throw new Error(`Unknown status: ${obj.status}!`);
     }
     return acc;
   }, {});
-  // console.log(styledTree);
-  return styledTree;
+  // console.log(tree);
+  return tree;
 };
 
-console.log(JSON.stringify(x, null, 3));
-// stylish(buildTree(obj1, obj2));
-// console.log(JSON.stringify(stringify(stylish(buildTree(obj1, obj2)))));
+const json = (array) => JSON.stringify(styledTree(array), null, 3);
+
+export default json;

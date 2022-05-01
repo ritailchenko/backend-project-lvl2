@@ -26,21 +26,21 @@ const ast = (file1, file2) => {
       return {
         key,
         children: ast(data1[key], data2[key]),
-        status: 'nested',
+        type: 'nested',
       };
     }
     if (!_.has(data1, key)) {
       return {
         key,
         value: data2[key],
-        status: 'added',
+        type: 'added',
       };
     }
     if (!_.has(data2, key)) {
       return {
         key,
         value: data1[key],
-        status: 'deleted',
+        type: 'deleted',
       };
     }
     if (data1[key] !== data2[key]) {
@@ -48,18 +48,18 @@ const ast = (file1, file2) => {
         key,
         value1: data1[key],
         value2: data2[key],
-        status: 'changed',
+        type: 'changed',
       };
     }
     return {
       key,
       value: data1[key],
-      status: 'unchanged',
+      type: 'unchanged',
     };
   });
   const sortedResultArray = _.sortBy(resultTree, [(o) => o.key]);
 
-  return sortedResultArray;
+  return { type: 'root', children: sortedResultArray };
 };
 
 export default ast;

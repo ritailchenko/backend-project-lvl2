@@ -1,7 +1,6 @@
 import ast from './ast.js';
-import stylish from './formatters.js/stylish.js';
-import plain from './formatters.js/plain.js';
-import json from './formatters.js/json.js';
+import stylish from './formatters/stylish.js';
+import plain from './formatters/plain.js';
 
 const genDiff = (file1, file2, format) => {
   switch (format.format) {
@@ -10,9 +9,9 @@ const genDiff = (file1, file2, format) => {
     case 'plain':
       return plain(ast(file1, file2));
     case 'json':
-      return json(ast(file1, file2));
+      return JSON.stringify(ast(file1, file2), null, 3);
     default:
-      throw new Error(`Unknown formater: ${format.format}!`);
+      throw new Error(`Unknown format: ${format.format}!`);
   }
 };
 
