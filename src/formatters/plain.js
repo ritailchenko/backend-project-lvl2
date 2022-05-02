@@ -40,7 +40,7 @@ const mapping = {
 };
 
 const plain = (ast) => {
-  let pathToRoot = '';
+  const pathToRoot = '';
   const iter = (node) => mapping.root(node, pathToRoot);
   return iter(ast, pathToRoot);
 };

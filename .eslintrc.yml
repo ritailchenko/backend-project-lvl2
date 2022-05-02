@@ -5,13 +5,14 @@ env:
 extends:
   - airbnb-base
   - plugin:jest/recommended
+  - prettier
 parserOptions:
   ecmaVersion: 12
   sourceType: module
 rules:
   no-console: 0
   import/extensions: 0
-  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
+  no-underscore-dangle: [2, { 'allow': ['__filename', '__dirname'] }]
 # npx eslint . - проверка линтером
 # npx eslint --fix . -автоматическое исправление линтером
 
