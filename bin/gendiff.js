@@ -9,6 +9,7 @@ program
   .option('-f, --format [type]', 'output format', 'stylish')
 
   .action((filepath1, filepath2, format) => {
+    // console.log(filepath1);
     console.log(genDiff(filepath1, filepath2, format));
   });
 
