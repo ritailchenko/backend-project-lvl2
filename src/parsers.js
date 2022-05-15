@@ -1,6 +1,4 @@
-import fs from 'fs';
 import yaml from 'js-yaml';
-import path from 'path';
 
 // const parser = (file) => {
 //   const fileExt = path.extname(file);
@@ -20,12 +18,9 @@ import path from 'path';
 // };
 
 const parser = {
-  json: (file) =>
-    JSON.parse(fs.readFileSync(path.resolve('__fixtures__', file), 'utf8')),
-  yaml: (file) =>
-    yaml.load(fs.readFileSync(path.resolve('__fixtures__', file), 'utf8')),
-  yml: (file) =>
-    yaml.load(fs.readFileSync(path.resolve('__fixtures__', file), 'utf8')),
+  json: (file) => JSON.parse(file),
+  yaml: (file) => yaml.load(file),
+  yml: (file) => yaml.load(file),
 };
 
 export default parser;
