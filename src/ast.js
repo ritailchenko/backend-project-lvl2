@@ -7,6 +7,7 @@ const ast = (data1, data2) => {
 
   const resultTree = keys.map((key) => {
     if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+      // console.log(_.isObject(data2[key]));
       return {
         key,
         children: ast(data1[key], data2[key]),
