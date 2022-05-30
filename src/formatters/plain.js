@@ -22,14 +22,9 @@ const mapping = {
   added: ({ key, value }, pathToRoot) => `Property '${pathToRoot}${key}' was added with value: ${stringify(value)}`,
   deleted: ({ key }, pathToRoot) => `Property '${pathToRoot}${key}' was removed`,
   unchanged: () => '',
-  changed: ({ key, value1, value2 }, pathToRoot) =>
-    `Property '${pathToRoot}${key}' was updated. From ${stringify(
-      value1,
-    )} to ${stringify(value2)}`,
+  changed: ({ key, value1, value2 }, pathToRoot) => `Property '${pathToRoot}${key}' was updated. From ${stringify(value1)} to ${stringify(value2)}`,
   nested: ({ key, children }, pathToRoot) => {
-    const output = children.children.flatMap((child) =>
-      mapping[child.type](child, `${pathToRoot}${key}.`),
-    );
+    const output = children.children.flatMap((child) => mapping[child.type](child, `${pathToRoot}${key}.`));
     return output;
   },
 };

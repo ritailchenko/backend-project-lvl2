@@ -16,12 +16,12 @@ const stringForJson = readFile('testStringForJson.txt').trim();
 
 test('file1.json compare to file2.json to equal testStringForStylish', () => {
   expect(genDiff('file1.json', 'file2.json', 'stylish')).toMatch(
-    stringForStylish
+    stringForStylish,
   );
 });
 test('file1.yaml compare to file2.yaml to equal testStringForStylish', () => {
   expect(genDiff('file1.yaml', 'file2.yaml', 'stylish')).toMatch(
-    stringForStylish
+    stringForStylish,
   );
 });
 test('file1.json compare to file2.json to equal testStringForPlain', () => {

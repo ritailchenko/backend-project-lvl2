@@ -5,7 +5,6 @@ env:
 extends:
   - airbnb-base
   - plugin:jest/recommended
-  - prettier
 parserOptions:
   ecmaVersion: 12
   sourceType: module

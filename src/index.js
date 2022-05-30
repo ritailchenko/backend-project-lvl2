@@ -6,8 +6,8 @@ import plain from './formatters/plain.js';
 import parser from './parsers.js';
 
 const getData = (pathToFile) => parser[path.extname(pathToFile).slice(1)](
-    fs.readFileSync(path.resolve('__fixtures__', pathToFile), 'utf8')
-  );
+  fs.readFileSync(path.resolve('__fixtures__', pathToFile), 'utf8'),
+);
 
 const getFormatter = {
   stylish: (diff) => stylish(diff),
