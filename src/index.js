@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-// import _ from 'lodash';
 import ast from './ast.js';
 import stylish from './formatters/stylish.js';
 import plain from './formatters/plain.js';
@@ -22,7 +21,7 @@ const genDiff = (pathToFile1, pathToFile2, format = 'stylish') => {
   const data2 = getData(pathToFile2);
   const diff = ast(data1, data2);
 
-  return getFormatter[format.format](diff);
+  return getFormatter[format](diff);
 };
 
 // const genDiff = (file1, file2, format) => {
