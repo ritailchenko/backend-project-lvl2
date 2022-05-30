@@ -36,10 +36,6 @@
     "eslint-plugin-jest": "^24.3.6",
     "jest": "^27.0.6"
   },
-  "prettier": {
-    "trailingComma": "all",
-    "singleQuote": true
-  },
   "jest": {
     "testEnvironment": "node",
     "transform": {}

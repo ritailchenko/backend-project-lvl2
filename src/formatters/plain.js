@@ -15,17 +15,12 @@ const stringify = (value) => {
 
 const mapping = {
   root: ({ children }, pathToRoot) => {
-    const output = children.flatMap((child) =>
-      mapping[child.type](child, pathToRoot),
-    );
+    const output = children.flatMap((child) => mapping[child.type](child, pathToRoot));
     const filteredLines = output.filter((line) => line !== '');
-
     return filteredLines.join('\n');
   },
-  added: ({ key, value }, pathToRoot) =>
-    `Property '${pathToRoot}${key}' was added with value: ${stringify(value)}`,
-  deleted: ({ key }, pathToRoot) =>
-    `Property '${pathToRoot}${key}' was removed`,
+  added: ({ key, value }, pathToRoot) => `Property '${pathToRoot}${key}' was added with value: ${stringify(value)}`,
+  deleted: ({ key }, pathToRoot) => `Property '${pathToRoot}${key}' was removed`,
   unchanged: () => '',
   changed: ({ key, value1, value2 }, pathToRoot) =>
     `Property '${pathToRoot}${key}' was updated. From ${stringify(
@@ -38,7 +33,6 @@ const mapping = {
     return output;
   },
 };
-
 const plain = (ast) => {
   const pathToRoot = '';
   const iter = (node) => mapping.root(node, pathToRoot);
