@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const indent = (depth, spaceCount = 4) => ' '.repeat(depth * spaceCount - 2);
+const indent = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount - 2);
 
 const stringify = (data, depth, mapping) => {
   if (!_.isObject(data)) {
@@ -37,7 +37,7 @@ const mapping = {
     return [data1, data2];
   },
   nested: ({ key, children }, depth, iter) => {
-    const output = children.children.flatMap(
+    const output = children.flatMap(
       (child) => mapping[child.type](child, depth + 1, iter),
     );
     return `${indent(depth)}  ${key}: {\n${output.join('\n')}\n${indent(
