@@ -21,7 +21,7 @@ Jest framework was used to write tests. To test program use "test" command.
 
 gendiff JSON-files format stylish, format plain, format JSON
 
-![Screen Shot 2022-06-11 at 1 09 11 PM](http://www.jsondiff.com/)
+![Screen Shot 2022-06-11 at 1 09 11 PM](https://asciinema.org/a/3rJslTVST7tuTmj36HnxKhtw8)
 
 gendiff YAML-files format stylish, format plain, format JSON
 
