@@ -6,9 +6,10 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2a71187e86d393f47215/test_coverage)](https://codeclimate.com/github/ritailchenko/backend-project-lvl2/test_coverage)
 
-This is a CLI utility that perceives the difference between two data structures. This is a popular task for which there are many online services, such as http://www.jsondiff.com/. A similar mechanism is used when outputting tests or when automatically tracking changes in configuration files.
+This is a CLI utility that perceives the difference between two data structures. This is a popular task for which there are many online services,
+such as http://www.jsondiff.com/. A similar mechanism is used when outputting tests or when automatically tracking changes in configuration files.
 
-Utility features:
+__Utility features:__
 
 + Support for different input formats: yaml, json
 + Report generation in the form of plain text, stylish and json
@@ -19,11 +20,11 @@ Input format: gendiff file1 file2 --format [plain, json, stylish]. If no format 
 
 Jest framework was used to write tests. To test program use "test" command. 
 
-gendiff JSON-files format stylish, format plain, format JSON
+__gendiff JSON-files format stylish, format plain, format JSON__
 
 [![asciicast](https://asciinema.org/a/VE6l9xtiq4Yu35UAGHZTFkL82.svg)](https://asciinema.org/a/VE6l9xtiq4Yu35UAGHZTFkL82)
 
-gendiff YAML-files format stylish, format plain, format JSON
+__gendiff YAML-files format stylish, format plain, format JSON__
 
 <a href="https://asciinema.org/a/OntR7jJ8inc2KP1rty9QDQ5Vl" target="_blank"><img src="https://asciinema.org/a/OntR7jJ8inc2KP1rty9QDQ5Vl.svg" /></a>
 
